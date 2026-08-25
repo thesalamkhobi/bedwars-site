@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بدوارز پارسی | مرجع تخصصی بدوارز ماینکرفت ایران</title>
+  <meta name="description" content="بزرگترین جامعه بازیکنان بدوارز در ایران. دانلود بهترین ریسورس‌پک‌ها، معرفی سرورهای معتبر داخلی و خارجی، و کامل‌ترین آموزش‌های پیروزی در میدان نبرد." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+  <!-- Canvas for glowing space particles -->
+  <canvas id="bg-particles" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header class="site-header" style="position: relative; z-index: 100;">
+    <div class="container header-container">
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-logo" id="header-brand-logo">
+        <div class="logo-badge">
+          <!-- Minecraft BedWars Sword & Bed Icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
+            <path d="M13 19l6-6"></path>
+            <path d="M16 16l4 4"></path>
+            <path d="M19 21l2-2"></path>
+          </svg>
+        </div>
+        <span>بدوارز پارسی</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-menu" id="primary-nav-menu">
+          <li><a href="index.html" class="nav-link active">صفحه اصلی</a></li>
+          <li><a href="#servers" class="nav-link">سرورها</a></li>
+          <li><a href="products.html" class="nav-link">ریسورس‌پک‌ها</a></li>
+          <li><a href="about.html" class="nav-link">آموزش‌ها و راهنما</a></li>
+          <li><a href="#community" class="nav-link">شبکه‌های اجتماعی</a></li>
+          <li><a href="contact.html" class="nav-link">تماس و سفارش</a></li>
+        </ul>
+      </nav>
+
+      <!-- User Auth Action -->
+      <div class="nav-actions">
+        <button class="btn auth-btn" id="btn-open-auth-modal" aria-label="ورود به حساب یا ثبت نام">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>ورود / ثبت‌نام</span>
+        </button>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toggle" id="btn-mobile-menu" aria-label="باز کردن منوی موبایل">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main style="position: relative; z-index: 10;">
+    <!-- Hero Section (Exact Match to Imported Stitch Design) -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left: 3D BedWars Floating Island Arena Visual -->
+          <div class="hero-visual" id="hero-arena-card">
+            <div class="hero-visual-content">
+              <!-- High-Fidelity Vector Graphic of Minecraft BedWars Sky Arena -->
+              <svg class="arena-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8"/>
+                    <stop offset="50%" stop-color="#8b5cf6" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#090d1f" stop-opacity="0.9"/>
+                  </linearGradient>
+                  <linearGradient id="islandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#4ade80"/>
+                    <stop offset="25%" stop-color="#16a34a"/>
+                    <stop offset="45%" stop-color="#854d0e"/>
+                    <stop offset="100%" stop-color="#374151"/>
+                  </linearGradient>
+                  <linearGradient id="crystalGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8"/>
+                    <stop offset="100%" stop-color="#818cf8"/>
+                  </linearGradient>
+                  <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                <!-- Nebula / Space Background Aura -->
+                <circle cx="250" cy="200" r="180" fill="url(#skyGrad)" opacity="0.35" filter="url(#glowEffect)" />
+
+                <!-- Floating Distant Islands -->
+                <g opacity="0.65" transform="translate(40, -30)">
+                  <polygon points="360,110 390,95 420,110 390,125" fill="#22c55e" />
+                  <polygon points="360,110 390,125 390,150 360,135" fill="#713f12" />
+                  <polygon points="420,110 390,125 390,150 420,135" fill="#451a03" />
+                  <polygon points="390,150 390,175 405,145" fill="#334155" />
+                  <!-- Emerald Generator Beam -->
+                  <line x1="390" y1="95" x2="390" y2="40" stroke="#10b981" stroke-width="2" stroke-dasharray="3 3" opacity="0.8"/>
+                </g>
+
+                <g opacity="0.55" transform="translate(-100, 20)">
+                  <polygon points="120,160 150,145 180,160 150,175" fill="#22c55e" />
+                  <polygon points="120,160 150,175 150,195 120,180" fill="#713f12" />
+                  <polygon points="180,160 150,175 150,195 180,180" fill="#451a03" />
+                </g>
+
+                <!-- Main BedWars Base Island (Isometric Minecraft Blocks) -->
+                <g id="main-island">
+                  <!-- Island Dirt & Deepslate Bottom Cone -->
+                  <polygon points="150,280 250,330 350,280 250,420" fill="#1e293b" opacity="0.9" />
+                  <polygon points="150,280 250,330 250,420" fill="#334155" />
+                  <polygon points="350,280 250,330 250,420" fill="#0f172a" />
+
+                  <!-- Island Upper Rock Layers -->
+                  <polygon points="130,260 250,320 370,260 250,200" fill="url(#islandGrad)" />
+                  <polygon points="130,260 250,320 250,350 130,290" fill="#78350f" />
+                  <polygon points="370,260 250,320 250,350 370,290" fill="#451a03" />
+
+                  <!-- Wool Defense Layer / Blocks -->
+                  <!-- Red Bed Cube -->
+                  <g transform="translate(190, 220)">
+                    <rect x="0" y="0" width="36" height="20" rx="3" fill="#ef4444" stroke="#b91c1c" stroke-width="2"/>
+                    <rect x="0" y="0" width="12" height="20" rx="2" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+                    <text x="18" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">BED</text>
+                  </g>
+
+                  <!-- Forge & Iron/Gold Ingot Spawner -->
+                  <g transform="translate(290, 235)">
+                    <polygon points="0,0 20,-10 40,0 20,10" fill="#94a3b8" />
+                    <polygon points="0,0 20,10 20,25 0,15" fill="#64748b" />
+                    <polygon points="40,0 20,10 20,25 40,15" fill="#475569" />
+                    <!-- Floating Iron & Gold Particles -->
+                    <circle cx="20" cy="-15" r="4" fill="#fbbf24" filter="url(#glowEffect)"/>
+                    <circle cx="10" cy="-25" r="3.5" fill="#e2e8f0" filter="url(#glowEffect)"/>
+                  </g>
+
+                  <!-- Wool Bridging Blocks Path to Mid -->
+                  <polygon points="130,260 100,245 70,260 100,275" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+                  <polygon points="70,260 40,245 10,260 40,275" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5"/>
+                  <polygon points="40,245 10,230 -20,245 10,260" fill="#818cf8" stroke="#4f46e5" stroke-width="1.5"/>
+
+                  <!-- Diamond Generator Tower on Right -->
+                  <g transform="translate(320, 180)">
+                    <polygon points="15,0 30,-8 45,0 30,8" fill="#0284c7" />
+                    <polygon points="15,0 30,8 30,45 15,37" fill="#0369a1" />
+                    <polygon points="45,0 30,8 30,45 45,37" fill="#075985" />
+                    <!-- Spinning Diamond Gem -->
+                    <polygon points="30,-22 38,-14 30,-6 22,-14" fill="#38bdf8" filter="url(#glowEffect)"/>
+                  </g>
+
+                  <!-- Floating Upgrade Beacon / Core -->
+                  <circle cx="250" cy="180" r="14" fill="url(#crystalGlow)" filter="url(#glowEffect)" opacity="0.9"/>
+                </g>
+              </svg>
+
+              <!-- Live Badge -->
+              <div class="visual-badge">
+                <span class="pulse-dot"></span>
+                <span>سرورهای ۱.۸.۹ تا ۱.۲۰+ آنلاین</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Hero Typography & Call-To-Actions (Exact Stitch Content) -->
+          <div class="hero-text">
+            <h1 class="hero-title" id="hero-main-title">
+              <span>BedWars Minecraft</span>
+            </h1>
+            <p class="hero-desc">
+              بزرگترین جامعه بازیکنان بدوارز در ایران. دانلود بهترین ریسورس‌پک‌ها، معرفی سرورهای معتبر داخلی و خارجی، و کامل‌ترین آموزش‌های موردنیاز برای پیروزی در میدان نبرد.
+            </p>
+
+            <!-- Buttons matching exact Stitch layout -->
+            <div class="hero-cta">
+              <a href="#servers" class="btn btn-primary" id="hero-btn-servers">
+                <span>مشاهده سرورها</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 12H5"></path>
+                  <path d="M12 19l-7-7 7-7"></path>
+                </svg>
+              </a>
+
+              <a href="products.html" class="btn btn-ghost" id="hero-btn-packs">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>دانلود ریسورس‌پک‌ها</span>
+              </a>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-number">+۴۵,۰۰۰</span>
+                <span class="stat-label">گیمر فعال ایرانی</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">+۱۲۰</span>
+                <span class="stat-label">ریسورس‌پک و مودپک</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">۴۵ ms</span>
+                <span class="stat-label">میانگین پینگ سرورها</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Tournament Announcement Notice -->
+    <div class="container">
+      <div class="notice-banner" id="announcement-banner">
+        <div class="notice-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </div>
+        <div class="notice-text">
+          <strong>تورنمنت سراسری بدوارز پارسی (جایزه ۵۰ میلیون ریالی + رنک دائمی VIP):</strong>
+          ثبت‌نام تیم‌های ۲ نفره و ۴ نفره آغاز شد.
+          <a href="contact.html" class="notice-link">ثبت‌نام سریع در تلگرام ←</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Best Servers Section (بهترین سرورها) -->
+    <section class="section-container" id="servers" style="margin-bottom: 80px;">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-icon">
+              <!-- Server Rack Icon -->
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+            </div>
+            <h2 class="section-title">بهترین سرورها</h2>
+          </div>
+          <p class="section-subtitle">
+            پرطرفدارترین سرورهای بدوارز با پینگ مناسب برای ایران، اتصال پایدار و رقابت در بالاترین سطح.
+          </p>
+        </div>
+
+        <!-- Server Cards Grid matching the Stitch visual layout -->
+        <div class="servers-grid">
+          <!-- Server 1: Hypixel -->
+          <div class="server-card glass-panel" id="card-server-hypixel">
+            <div class="server-card-top">
+              <span class="server-badge-status">
+                <span class="status-dot"></span>
+                <span>Online •</span>
+              </span>
+              <div class="server-icon-wrap" title="سرور رسمی پرمیوم">
+                <!-- Star icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+            </div>
+
+            <div class="server-card-body">
+              <h3 class="server-title">Hypixel</h3>
+              <span class="server-type">GLOBAL</span>
+              <div class="server-meta-stats">
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#89ceff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  <span>۱۲۰k بازیکن</span>
+                </span>
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span data-ping="88">88 ms</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Server IP Copy Box -->
+            <div class="server-ip-box" data-ip="hypixel.net" data-name="Hypixel" title="کلیک برای کپی آدرس IP">
+              <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="server-ip-text">hypixel.net</span>
+            </div>
+          </div>
+
+          <!-- Server 2: PikaNetwork -->
+          <div class="server-card glass-panel" id="card-server-pika">
+            <div class="server-card-top">
+              <span class="server-badge-status">
+                <span class="status-dot"></span>
+                <span>Online •</span>
+              </span>
+              <div class="server-icon-wrap" title="کرک شده و بدون نیاز به اکانت اصلی">
+                <!-- Lightning Bolt icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+            </div>
+
+            <div class="server-card-body">
+              <h3 class="server-title">PikaNetwork</h3>
+              <span class="server-type">CRACKED</span>
+              <div class="server-meta-stats">
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#89ceff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  <span>۱۴k بازیکن</span>
+                </span>
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span data-ping="62">62 ms</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Server IP Copy Box -->
+            <div class="server-ip-box" data-ip="mp.pika.host" data-name="PikaNetwork" title="کلیک برای کپی آدرس IP">
+              <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="server-ip-text">mp.pika.host</span>
+            </div>
+          </div>
+
+          <!-- Server 3: Ultimis -->
+          <div class="server-card glass-panel" id="card-server-ultimis">
+            <div class="server-card-top">
+              <span class="server-badge-status">
+                <span class="status-dot"></span>
+                <span>Online •</span>
+              </span>
+              <div class="server-icon-wrap" title="سرور پرمیوم و امن">
+                <!-- Cloud icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="server-card-body">
+              <h3 class="server-title">Ultimis</h3>
+              <span class="server-type">PREMIUM</span>
+              <div class="server-meta-stats">
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#89ceff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  <span>۸k بازیکن</span>
+                </span>
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span data-ping="74">74 ms</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Server IP Copy Box -->
+            <div class="server-ip-box" data-ip="mp.ultimis.net" data-name="Ultimis" title="کلیک برای کپی آدرس IP">
+              <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="server-ip-text">mp.ultimis.net</span>
+            </div>
+          </div>
+
+          <!-- Server 4: JartexNetwork -->
+          <div class="server-card glass-panel" id="card-server-jartex">
+            <div class="server-card-top">
+              <span class="server-badge-status">
+                <span class="status-dot"></span>
+                <span>Online •</span>
+              </span>
+              <div class="server-icon-wrap">
+                <!-- Flame icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="server-card-body">
+              <h3 class="server-title">JartexNetwork</h3>
+              <span class="server-type">CRACKED &amp; NO-LAG</span>
+              <div class="server-meta-stats">
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#89ceff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  <span>۱۱k بازیکن</span>
+                </span>
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span data-ping="58">58 ms</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="server-ip-box" data-ip="top.jartex.fun" data-name="JartexNetwork" title="کلیک برای کپی آدرس IP">
+              <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="server-ip-text">top.jartex.fun</span>
+            </div>
+          </div>
+
+          <!-- Server 5: BlockDrop -->
+          <div class="server-card glass-panel" id="card-server-blockdrop">
+            <div class="server-card-top">
+              <span class="server-badge-status">
+                <span class="status-dot"></span>
+                <span>Online •</span>
+              </span>
+              <div class="server-icon-wrap">
+                <!-- Shield icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="server-card-body">
+              <h3 class="server-title">BlockDrop</h3>
+              <span class="server-type">CRACKED / CUSTOM MAPS</span>
+              <div class="server-meta-stats">
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#89ceff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  <span>۶.۵k بازیکن</span>
+                </span>
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span data-ping="68">68 ms</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="server-ip-box" data-ip="bedwars.blockdrop.org" data-name="BlockDrop" title="کلیک برای کپی آدرس IP">
+              <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="server-ip-text">bedwars.blockdrop.org</span>
+            </div>
+          </div>
+
+          <!-- Server 6: BedWars Parsi Realm (Iran Local) -->
+          <div class="server-card glass-panel" id="card-server-local">
+            <div class="server-card-top">
+              <span class="server-badge-status" style="background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.4); color: #fef08a;">
+                <span class="status-dot" style="background: #f59e0b; box-shadow: 0 0 8px #f59e0b;"></span>
+                <span>Iran Realm •</span>
+              </span>
+              <div class="server-icon-wrap">
+                <!-- Crown icon -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="server-card-body">
+              <h3 class="server-title">BedWars Parsi</h3>
+              <span class="server-type">LOW PING IRAN</span>
+              <div class="server-meta-stats">
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#89ceff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                  <span>۳.۲k آنلاین</span>
+                </span>
+                <span class="server-meta-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span data-ping="18" style="color: #10b981; font-weight: 700;">18 ms</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="server-ip-box" data-ip="play.bedwarsparsi.ir" data-name="BedWars Parsi Iran" title="کلیک برای کپی آدرس IP">
+              <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="server-ip-text">play.bedwarsparsi.ir</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Resource Packs Highlight Section -->
+    <section class="section-container" style="margin-bottom: 80px;">
+      <div class="container">
+        <div class="section-header" style="flex-direction: row; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <div class="section-title-wrap">
+              <div class="section-icon">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <h2 class="section-title">ریسورس‌پک‌های منتخب بدوارز</h2>
+            </div>
+            <p class="section-subtitle">
+              تست شده با بیشترین میزان افزایش FPS، شمشیرهای کوتاه حرفه‌ای، کراس‌هیر دقیق و اسکای کهکشانی.
+            </p>
+          </div>
+          <a href="products.html" class="btn btn-ghost" style="padding-inline: 20px;">
+            <span>مشاهده آرشیو کامل پک‌ها</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+        </div>
+
+        <div class="products-grid">
+          <!-- Featured Pack 1 -->
+          <div class="product-card" data-category="16x fps" data-download="https://dl.bedwarsparsi.ir/packs/sapphire-16x.zip" data-price="رایگان">
+            <div class="product-thumb">
+              <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="250" fill="#0f172a"/>
+                <circle cx="200" cy="125" r="90" fill="#0284c7" opacity="0.25"/>
+                <!-- Diamond Short Sword Graphic -->
+                <path d="M120 180 L260 40 L280 60 L140 200 Z" fill="#38bdf8" stroke="#0284c7" stroke-width="4"/>
+                <path d="M110 190 L90 210 L100 220 L120 200 Z" fill="#713f12"/>
+                <circle cx="260" cy="50" r="12" fill="#bae6fd" filter="url(#glowEffect)"/>
+                <text x="200" y="220" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">SAPPHIRE 16X FPS</text>
+              </svg>
+              <span class="product-badge" style="background: rgba(14, 165, 233, 0.85);">16x • افزایش FPS</span>
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Sapphire 16x PvP Edition</h3>
+              <p class="product-desc">بهترین پک ۱۶ پیکسل برای سیستم‌های ضعیف و میان‌رده با شمشیر کوتاه‌شده و افکت ذرات روان.</p>
+              <div class="product-tags">
+                <span class="tag-pill">نسخه 1.8.9</span>
+                <span class="tag-pill">+۴۵% FPS</span>
+                <span class="tag-pill">حجم: ۱۲ MB</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-ghost btn-preview-pack">پیش‌نمایش</button>
+                <a href="https://dl.bedwarsparsi.ir/packs/sapphire-16x.zip" download class="btn btn-primary">دانلود</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Pack 2 -->
+          <div class="product-card" data-category="32x pvp" data-download="https://dl.bedwarsparsi.ir/packs/nebula-32x.zip" data-price="رایگان">
+            <div class="product-thumb">
+              <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="250" fill="#17153b"/>
+                <circle cx="200" cy="125" r="90" fill="#8b5cf6" opacity="0.3"/>
+                <!-- Nebula Purple Blade -->
+                <path d="M130 170 L250 50 L270 70 L150 190 Z" fill="#c084fc" stroke="#7e22ce" stroke-width="4"/>
+                <circle cx="250" cy="60" r="14" fill="#e9d5ff" filter="url(#glowEffect)"/>
+                <text x="200" y="220" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">NEBULA 32X HYBRID</text>
+              </svg>
+              <span class="product-badge" style="background: rgba(139, 92, 246, 0.85);">32x • پرو پلیر</span>
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Nebula Void 32x HD</h3>
+              <p class="product-desc">طراحی اختصاصی برای راشرهای بدوارز با برجسته‌سازی سنگ‌آهن، الماس و تخت‌های رنگی.</p>
+              <div class="product-tags">
+                <span class="tag-pill">نسخه 1.8.9 - 1.20</span>
+                <span class="tag-pill">شفافیت آیتم</span>
+                <span class="tag-pill">حجم: ۲۴ MB</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-ghost btn-preview-pack">پیش‌نمایش</button>
+                <a href="https://dl.bedwarsparsi.ir/packs/nebula-32x.zip" download class="btn btn-primary">دانلود</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Pack 3 -->
+          <div class="product-card" data-category="sky cosmetic" data-download="https://dl.bedwarsparsi.ir/packs/sunset-galaxy.zip" data-price="رایگان">
+            <div class="product-thumb">
+              <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="250" fill="#090514"/>
+                <!-- Sunset Gradient Sky -->
+                <path d="M0 0 H400 V180 C300 230 100 140 0 250 Z" fill="url(#skyGrad)" opacity="0.6"/>
+                <circle cx="300" cy="80" r="30" fill="#f59e0b" filter="url(#glowEffect)"/>
+                <text x="200" y="220" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">GALAXY NIGHT SKY</text>
+              </svg>
+              <span class="product-badge" style="background: rgba(245, 158, 11, 0.85);">Custom Sky • کهکشان</span>
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Cosmic Sunset Custom Sky</h3>
+              <p class="product-desc">آسمان متحرک کهکشانی با ماه سه‌بعدی و ابرهای نورانی برای Optifine و Sodium.</p>
+              <div class="product-tags">
+                <span class="tag-pill">نیاز به Optifine</span>
+                <span class="tag-pill">HD Sky Overlay</span>
+                <span class="tag-pill">حجم: ۱۸ MB</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-ghost btn-preview-pack">پیش‌نمایش</button>
+                <a href="https://dl.bedwarsparsi.ir/packs/sunset-galaxy.zip" download class="btn btn-primary">دانلود</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us & Features Section -->
+    <section class="section-container" style="margin-bottom: 80px;">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <!-- Rocket icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+            </div>
+            <h3 class="feature-title">بهینه‌سازی FPS حداکثری</h3>
+            <p class="feature-desc">تمام پک‌ها و مادهای سایت به صورت تخصصی برای حذف افت فریم و روانی کامل در نبردهای سنگین تنظیم شده‌اند.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon">
+              <!-- Shield Check icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            </div>
+            <h3 class="feature-title">امنیت ۱۰۰٪ تضمین شده</h3>
+            <p class="feature-desc">فایل‌ها بدون هیچ‌گونه بدافزار، رات یا ویروس بوده و پیش از انتشار توسط تیم مانیتورینگ بدوارز پارسی اسکن می‌شوند.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon">
+              <!-- Zap icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="feature-title">پینگ و روتر اختصاصی</h3>
+            <p class="feature-desc">راهنمای جامع کاهش پینگ و انتخاب DNS پایدار برای اتصال بدون تایم‌اوت به سرورهای هایپیکسل و پیکا.</p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon">
+              <!-- Users Community icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3 class="feature-title">پشتیبانی تلگرام و دیسکورد</h3>
+            <p class="feature-desc">پشتیبانی فعال ۲۴/۷ برای حل مشکلات نصب کلاینت، سفارش تکسچر اختصاصی و هماهنگی مچ‌های دوستانه.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social & Community CTA Banner -->
+    <section class="section-container" id="community" style="margin-bottom: 80px;">
+      <div class="container">
+        <div class="glass-panel" style="padding: 40px; text-align: center; background: radial-gradient(circle at center, rgba(139, 92, 246, 0.18) 0%, rgba(11, 19, 38, 0.9) 70%);">
+          <h2 style="font-size: 32px; margin-bottom: 16px;">به جمع ۵۰ هزار گیمر بدوارز بپیوندید</h2>
+          <p style="color: var(--text-muted); max-width: 600px; margin-inline: auto; margin-bottom: 30px;">
+            در کانال تلگرام و سرور دیسکورد ما از آخرین مسابقات با جوایز نقدی، پک‌های تازه منتشر شده و کدهای تخفیف باخبر شوید.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+            <a href="https://t.me/BedWarsParsi" target="_blank" rel="noreferrer" class="btn btn-telegram" style="padding: 12px 28px; font-size: 15px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+              </svg>
+              <span>کانال تلگرام بدوارز پارسی</span>
+            </a>
+            <a href="https://discord.gg/bedwarsparsi" target="_blank" rel="noreferrer" class="btn btn-ghost" style="padding: 12px 28px; font-size: 15px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+              </svg>
+              <span>سرور دیسکورد بدوارز پارسی</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Complete Site Footer (Matching Design) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div>
+          <div class="brand-logo" style="margin-bottom: 16px;">
+            <div class="logo-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
+              </svg>
+            </div>
+            <span>بدوارز پارسی</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px;">
+            مرجع جامع دانلود ریسورس و ماد پک‌ها، آموزش‌های تکتیکال بدوارز ماینکرفت و مانیتورینگ آنلاین سرورها.
+          </p>
+          <div class="footer-socials">
+            <a href="https://t.me/BedWarsParsi" target="_blank" rel="noreferrer" class="social-btn" title="تلگرام">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            </a>
+            <a href="https://discord.gg/bedwarsparsi" target="_blank" rel="noreferrer" class="social-btn" title="دیسکورد">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028z"/></svg>
+            </a>
+            <a href="https://youtube.com/@bedwarsparsi" target="_blank" rel="noreferrer" class="social-btn" title="یوتیوب">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://aparat.com/bedwarsparsi" target="_blank" rel="noreferrer" class="social-btn" title="آپارات">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="#0b1326"></polygon></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Useful Links -->
+        <div>
+          <h4 class="footer-col-title">لینک‌های مفید</h4>
+          <ul class="footer-links">
+            <li><a href="about.html#rules" class="footer-link">قوانین سرور</a></li>
+            <li><a href="contact.html#report" class="footer-link">گزارش تخلف</a></li>
+            <li><a href="products.html" class="footer-link">ریسورس‌پک‌ها</a></li>
+            <li><a href="about.html" class="footer-link">راهنمای استراتژی بدوارز</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Navigation -->
+        <div>
+          <h4 class="footer-col-title">بخش‌های سایت</h4>
+          <ul class="footer-links">
+            <li><a href="#servers" class="footer-link">سرورهای بدوارز</a></li>
+            <li><a href="products.html" class="footer-link">فروشگاه و سفارش تلگرام</a></li>
+            <li><a href="about.html" class="footer-link">درباره ما</a></li>
+            <li><a href="contact.html" class="footer-link">تماس با پشتیبانی</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Telegram Quick Order -->
+        <div>
+          <h4 class="footer-col-title">سفارش سریع در تلگرام</h4>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+            سفارش طراحی اختصاصی ریسورس‌پک، خرید رنک و هماهنگی تورنمنت‌ها از طریق آیدی پشتیبانی:
+          </p>
+          <a href="https://t.me/BedWarsParsiSupport" target="_blank" rel="noreferrer" class="btn btn-telegram" style="width: 100%; font-size: 13px;">
+            <span>@BedWarsParsiSupport</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Copyright -->
+      <div class="footer-bottom">
+        <p>© ۲۰۲۴ تمام حقوق برای بدوارز پارسی محفوظ است. طراحی شده برای گیمرهای حرفه‌ای.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal Dialog (Login & Register) -->
+  <div class="modal-overlay" id="auth-modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close" aria-label="بستن پنجره">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <!-- Tab Buttons -->
+      <div style="display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px;">
+        <button class="filter-btn auth-tab-btn active" data-tab="tab-login" style="flex: 1;">ورود به حساب</button>
+        <button class="filter-btn auth-tab-btn" data-tab="tab-register" style="flex: 1;">ثبت نام جدید</button>
+      </div>
+
+      <!-- Login Form -->
+      <div class="auth-form-content" id="tab-login">
+        <form id="login-form-element">
+          <div class="form-group">
+            <label class="form-label">نام کاربری یا ایمیل</label>
+            <input type="text" class="form-input" placeholder="مثال: Steve_Bedwars" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">کلمه عبور</label>
+            <input type="password" class="form-input" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">ورود به پرتال</button>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div class="auth-form-content" id="tab-register" style="display: none;">
+        <form id="register-form-element">
+          <div class="form-group">
+            <label class="form-label">نام کاربری ماینکرفت (IGN)</label>
+            <input type="text" class="form-input" placeholder="مثال: Alex_PvP" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ایمیل معتبر</label>
+            <input type="email" class="form-input" placeholder="youremail@example.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">کلمه عبور</label>
+            <input type="password" class="form-input" placeholder="حداقل ۸ کاراکتر" required />
+          </div>
+          <button type="submit" class="btn btn-gold" style="width: 100%; margin-top: 10px;">ایجاد حساب کاربری</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resource Pack Lightbox Preview Modal -->
+  <div class="modal-overlay" id="preview-modal" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width: 600px;">
+      <button class="modal-close" aria-label="بستن پنجره">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      
+      <div style="margin-bottom: 16px;">
+        <h3 class="modal-preview-title" style="font-size: 20px; color: #fff; margin-bottom: 8px;">پیش‌نمایش ریسورس‌پک</h3>
+        <p class="modal-preview-desc" style="font-size: 14px; color: var(--text-muted); line-height: 1.7;"></p>
+      </div>
+
+      <div class="modal-preview-tags" style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;"></div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <a href="#" class="btn btn-primary modal-download-btn">دانلود مستقیم</a>
+        <a href="#" target="_blank" class="btn btn-telegram modal-telegram-btn">سفارش / پشتیبانی تلگرام</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
